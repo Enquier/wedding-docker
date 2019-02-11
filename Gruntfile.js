@@ -1,13 +1,11 @@
 module.exports = function(grunt) {
-if (grunt.file.exists('angular-mms-grunt-servers.json')) {
-    var server = grunt.file.readJSON('angular-mms-grunt-servers.json');
-    var serverPort = server.mms_port;
-    var serverHttps = true;
+if (grunt.file.exists('docker-defined-server.json')) {
+    var server = grunt.file.readJSON('docker-defined-server.json');
     var serveStatic = require('serve-static');
     var modRewrite = require('connect-modrewrite');
     connectObject["docker"] = {
         options: {
-            hostname: 'localhost',
+            hostname: server.host,
             port: 9000,
             protocol: 'https',
             //open: true,
