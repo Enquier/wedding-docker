@@ -16,4 +16,10 @@ if (grunt.file.exists('angular-mms-grunt-servers.json')) {
             }
         }
     };
-}
+
+    connect: connectObject,
+    grunt.registerTask('server', function(arg1) {
+        grunt.task.run('connect:' + arg1)
+
+    });
+};

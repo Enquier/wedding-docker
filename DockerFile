@@ -3,3 +3,11 @@
 
 FROM node:8-alpine
 
+ENV DATABASE_URL 'postgres://postgres/open-wedding'
+
+#pull git code or Copy from local filesystem
+#COPY ./*
+RUN npm install -g grunt-cli
+
+
+RUN npm install
