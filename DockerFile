@@ -1,0 +1,5 @@
+# syntax=docker/dockerfile:experimental
+#https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066
+
+FROM node:8-alpine
+

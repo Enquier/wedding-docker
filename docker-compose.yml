@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  postgresql:
+    image: postgres:9.4-alpine
+    volumes:
+        - pgdata:/var/lib/postgresql/data
+        - ./init/:/docker-entrypoint-initdb.d/
+    environment:
+        - POSTGRES_PASSWORD=areallysecurepassword
+        - POSTGRES_DB=postgres
+    networks:
+      - backend
+  frontend:
+    image: kscotttrip/wedding:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DATABASE_URL=postgres://postrgresql
+      - INVITATION_SECRET=supersecret
+      - NODE_ENV=development
+      - SESSION_SECRET?
+      - WEB:
+    networks:
+      - backend
+    secrets:
+      - source: website_crt
+        target: server.crt #mounted to /run/secrets/server.crt
+networks:
+  backend:
+    external: true
+volumes:
+  pgdata:
+    external: true
+secrets:
+  website_crt:
+    external: true
+  website_key:
+    external: true
+
